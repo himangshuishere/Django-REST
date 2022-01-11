@@ -26,7 +26,7 @@ class StreamPlatformDetailAV(APIView):
         try:
             sp = StreamPlatform.objects.get(pk=pk)
         except StreamPlatform.DoesNotExist:
-            return Response({'Error':'Watchlist Not Found'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'Error':'Streaming Platform Not Found'}, status=status.HTTP_404_NOT_FOUND)
         serializer = StreamPlatformSerializer(sp)
         return Response(serializer.data)
 
