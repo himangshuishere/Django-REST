@@ -2,12 +2,6 @@ from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from watchlist_app.models import Watchlist, StreamPlatform
 
-class StreamPlatformSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = StreamPlatform
-        fields = "__all__"
-
 
 class WatchlistSerializer(serializers.ModelSerializer):
 
@@ -17,6 +11,14 @@ class WatchlistSerializer(serializers.ModelSerializer):
         fields = "__all__" # ['id', 'movie_name', 'movie_about']
         # exclude = ['movie_released', 'id']
 
+
+class StreamPlatformSerializer(serializers.ModelSerializer):
+    
+    watchlist = WatchlistSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = StreamPlatform
+        fields = "__all__"
 
 
 
