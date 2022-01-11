@@ -1,6 +1,6 @@
 from django.core.exceptions import ValidationError
 from rest_framework import serializers
-from watchlist_app.models import Watchlist, StreamPlatform
+from watchlist_app.models import Review, Watchlist, StreamPlatform
 
 
 class WatchlistSerializer(serializers.ModelSerializer):
@@ -22,7 +22,10 @@ class StreamPlatformSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = "__all__"
 
 # def name_length(value):
 #     if len(value) < 2:
