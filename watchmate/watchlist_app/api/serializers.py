@@ -3,6 +3,14 @@ from rest_framework import serializers
 from watchlist_app.models import Review, Watchlist, StreamPlatform
 
 
+class ReviewSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Review
+        exclude = ('watchlist',)
+        # fields = "__all__"
+
+
 class WatchlistSerializer(serializers.ModelSerializer):
 
 
@@ -22,10 +30,6 @@ class StreamPlatformSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ReviewSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Review
-        fields = "__all__"
 
 # def name_length(value):
 #     if len(value) < 2:
