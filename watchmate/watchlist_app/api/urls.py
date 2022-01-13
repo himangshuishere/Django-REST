@@ -1,9 +1,9 @@
 from django.urls import path, include
-from watchlist_app.api.views import ReviewList, ReviewDetail, StreamPlatformAV, StreamPlatformDetailAV, StreamPlatformVS, WatchListAV, WatchDetailAV, ReviewCreate
+from watchlist_app.api.views import ReviewList, ReviewDetail, StreamPlatformAV, StreamPlatformDetailAV, StreamPlatformMVS, WatchListAV, WatchDetailAV, ReviewCreate
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register('stream', StreamPlatformVS, basename='streamplatformVS')
+router.register('stream', StreamPlatformMVS, basename='StreamPlatformMVS')
 
 urlpatterns = [
     path('list/', WatchListAV.as_view(), name='movie-list'),
