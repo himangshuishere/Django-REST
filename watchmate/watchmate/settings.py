@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'watchlist_app',
     'rest_framework',
     'rest_framework.authtoken',
+    'userApp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

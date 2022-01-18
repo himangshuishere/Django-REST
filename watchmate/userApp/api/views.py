@@ -1,0 +1,17 @@
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework.status import *
+
+from userApp.api.serializers import RegistrationSerializer
+
+
+@api_view(['POST'])
+def registration_view(request):
+
+    if request.method == 'POST':
+        serializer = RegistrationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return serializer.data
+        
+    return Response(status=HTTP_201_CREATED)
