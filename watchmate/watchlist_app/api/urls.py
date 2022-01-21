@@ -3,7 +3,7 @@ from watchlist_app.api.views import ReviewList, ReviewDetail, StreamPlatformAV, 
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register('stream', StreamPlatformMVS, basename='StreamPlatformMVS')
+router.register('stream/', StreamPlatformMVS, basename='streamplatform')
 
 urlpatterns = [
     path('list/', WatchListAV.as_view(), name='movie-list'),
