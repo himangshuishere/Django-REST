@@ -7,13 +7,13 @@ from django.urls.base import reverse
 class NoteModel(models.Model):
     title = models.CharField(max_length=60)
     content = models.TextField()
-    # slug = models.SlugField(default="", blank=True, null=False, db_index=True)
+    slug = models.SlugField(default="", blank=True, null=False, db_index=True)
 
     def __str__(self) -> str:
         return "{}".format(self.title)
     
-    # def get_absolute_url(self):
-    #     return reverse("notes_detail", args=[self.slug])
+    def get_absolute_url(self):
+        return reverse("notes_detail", args=[self.slug])
 
     class Meta:
         verbose_name = 'Note'

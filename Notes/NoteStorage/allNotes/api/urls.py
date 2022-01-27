@@ -6,5 +6,5 @@ from .views import notes_cud, notes_view
 
 urlpatterns = [
     path('notes/', notes_view.as_view(), name='notes-fetch'),
-    path('notes/<int:pk>', notes_cud.as_view(), name='notes-detail')
+    path('notes/<slug:slug>', notes_cud.as_view(), name='notes-detail')
 ]

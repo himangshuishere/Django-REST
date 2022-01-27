@@ -26,16 +26,16 @@ class notes_view(APIView):
 
 class notes_cud(APIView): # notes_cud => notes_CreateUpdateDelete
 
-    def get(self, request, pk):
+    def get(self, request, slug):
         try:
-            notesFetch = NoteModel.objects.get(pk=pk)
+            notesFetch = NoteModel.objects.get(slug=slug)
         except NoteModel.DoesNotExist:
             return Response({'Error':'Note not found'}, status=status.HTTP_404_NOT_FOUND)
         serializer = NoteSerializer(notesFetch)
         return Response(serializer.data)
     
-    def put(self, request, pk):
-        notePut = NoteModel.objects.get(pk=pk)
+    def put(self, request, slug):
+        notePut = NoteModel.objects.get(slug=slug)
         serializer = NoteSerializer(notePut, data=request.data)
 
         if serializer.is_valid():
@@ -44,6 +44,6 @@ class notes_cud(APIView): # notes_cud => notes_CreateUpdateDelete
 
         else: return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self, request, pk):
-        noteDelete = NoteModel.objects.get(pk=pk)
+    def delete(self, request, slug):
+        noteDelete = NoteModel.objects.get(slug=slug)
         return Response(status=status.HTTP_200_OK)
