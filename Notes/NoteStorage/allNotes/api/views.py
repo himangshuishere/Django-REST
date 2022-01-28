@@ -2,24 +2,33 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import *
-from allNotes.api.permissions import NoteUser
+from django.utils.text import slugify
+from rest_framework.authtoken.models import Token
 
 # App Specific Import(s)
+from allNotes.api.permissions import NoteUser
 from allNotes.api.serializers import NoteSerializer
 from allNotes.models import NoteModel
 
 
 class note_fetch(APIView):
-    permission_classes = [NoteUser]
+    permission_classes = [IsAuthenticated]#, NoteUser]
 
     def get(self, request):
-        db = NoteModel.objects.all()
+        # mainToken = Token.objects.get(user=request.user).key
+        db = NoteModel.objects.filter(author=request.user)
         serializerClass = NoteSerializer(db, many=True)
         return Response(serializerClass.data)
     
     def post(self, request):
         serializerClass = NoteSerializer(data=request.data)
         if serializerClass.is_valid():
+            if 'slug' not in serializerClass.validated_data.keys():
+                serializerClass.validated_data['slug'] = slugify(serializerClass.validated_data['title'])
+            
+            if 'author' not in serializerClass.validated_data.keys():
+                # serializerClass.validated_data['author'] = Token.objects.get(key=request.headers['Authorization']).user
+                serializerClass.validated_data['author'] = request.user
             serializerClass.save()
             return Response(serializerClass.data)
         
