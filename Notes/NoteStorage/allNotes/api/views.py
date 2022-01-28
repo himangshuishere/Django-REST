@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import *
+from allNotes.api.permissions import NoteUser
 
 # App Specific Import(s)
 from allNotes.api.serializers import NoteSerializer
@@ -9,7 +10,7 @@ from allNotes.models import NoteModel
 
 
 class note_fetch(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [NoteUser]
 
     def get(self, request):
         db = NoteModel.objects.all()
@@ -26,7 +27,7 @@ class note_fetch(APIView):
 
 
 class note_rud(APIView): # note_cud => note_RetrieveUpdateDelete
-    permission_classes = [IsAuthenticated]
+    permission_classes = [NoteUser]
     
     def get(self, request, slug):
         try:
