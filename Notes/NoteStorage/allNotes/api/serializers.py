@@ -3,9 +3,10 @@ from allNotes.models import NoteModel
 
 
 class NoteSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    # author = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = NoteModel
-        fields = "__all__"
+        exclude = ('author',)
+        # fields = "__all__"
         # fields = ['title', 'content', 'author', 'slug']

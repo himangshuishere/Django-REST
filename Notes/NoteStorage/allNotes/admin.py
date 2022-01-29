@@ -6,6 +6,7 @@ from .models import NoteModel
 class NoteModelAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('title',)}
     list_display = ('title', 'slug', 'author')
+    list_filter = ('author',)
 
 
 admin.site.register(NoteModel, NoteModelAdmin)
